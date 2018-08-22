@@ -6,15 +6,15 @@ body {
     margin: 0px auto;
     max-width: 960px;
     box-sizing: border-box;
-    background-color:#777;
+    background-color:red;
     position: relative;
 }
 
 .header {
-    margin:40px auto 0 auto;
+    margin:40px auto 0px;
     background-color:#555;
-    line-height: 50px;
-    color:red;
+    line-height: 70px;
+    color: chartreuse;
 
 
 }
@@ -26,19 +26,17 @@ body {
 
 #game {
     background-color: cornflowerblue;
-    padding-bottom: 20px;
+    padding: 50px 0 20px;
 
 }
 
 #solution {
     background-color: gold;
-}
-
-#solutionpic {
     display:block;
     width: 300px;
     height: 300px;
     margin: 0px auto;
+    padding: 20px 20px;
     border:10px dotted dodgerblue;
 }
 
