@@ -1,24 +1,34 @@
-let answers = ["bill murray", "someone else"];
+let answers = ["bill murray"];
 let solution = document.getElementById("solutionpic");
 let chosenWord = answers[Math.floor(Math.random() * answers.length)];
-let display = "";
-let guesses = "";
+var display = "";
+var guesses = " ";
+var wins = 0;
+var lives = 10;
 
 
 function solve() {
-    document.getElementById("solution").innerHTML = `<img src="https://www.fillmurray.com/300/300" id="solutionpic">`
+    document.getElementById("solution").innerHTML = `<img src="https://www.fillmurray.com/300/300" id="solutionpic">`;
+    wins++;
 }
 
 
 document.onkeyup = function(event) {
-    let guess = event.key;
+    display = "";
+    guess = event.key;
+    guesses += guess;
 
+    for (i = 0; i < chosenWord.length; i++) {
 
-    for (i = 0, x = chosenWord.length; i < x; i += 1) {
-        if (guesses.indexOf(chosenWord[i]) >= 0) { display += chosenWord[i]} else {
-            display += "_";
-        }
-    }
+        if (guesses.indexOf(chosenWord[i]) !== -1 ) {display += chosenWord[i];} else {display += "_"; lives--;};
+        
+
+    };
+
+    if (display === chosenWord) {solve();}
+
+    document.getElementById("currentWordField").innerText = display;
+    document.getElementById("usedLettersField").innerText = guesses;
 
 
 };
