@@ -22,7 +22,7 @@ var lives = 10;
 let song = document.getElementById("congrats");
 
 
-// 
+// in combination with setTimeout, used to reset the picture to a question mark after 3 seconds
 function resetPicture() {
     document.getElementById("solution").innerHTML = `<img src="assets/images/questionmark.jpg" id="solutionpic">`
 }
@@ -33,7 +33,6 @@ function solve() {
     if (chosenWord === "bill murray") {
         document.getElementById("solution").innerHTML = `<img src="https://www.fillmurray.com/300/300" id="solutionpic">`;
     };
-
 
     if (chosenWord === "tom cruise") {
         document.getElementById("solution").innerHTML = `<img src="https://mediamass.net/jdd/public/documents/celebrities/333.jpg" id="solutionpic">`;
@@ -47,16 +46,21 @@ function solve() {
         document.getElementById("solution").innerHTML = `<img src="https://static.listionary.com/core/uploads/1463134870-arnold-schwarzenegger.jpg" id="solutionpic">`;
     };
 
+
+    // resets picture after 3 seconds
     setTimeout(resetPicture, 3000);
 
+    // removes a completed word from answers array
     answers.splice(answers.indexOf(chosenWord), 1);
 
+    // after a win this increases score, resets used letters, makes the first space guess, resets lives to 10, picks a new word
     wins++;
     usedLetters = " ";
     lives = "10";
     chosenWord = answers[Math.floor(Math.random() * answers.length)];
+
+    // once all puzzles have been solved displays a congratulations message and song
     if (wins === neededWins) {
-        document.getElementById()
         display = "YOU GOT THEM ALL!!!";
         song.play();
     }
@@ -66,6 +70,24 @@ function solve() {
 
 // runs the game function on every keyup event
 document.onkeyup = function (event) {
+
+    // sets hint based on current chosenWord
+    if (chosenWord === "bill murray") {
+        document.getElementById("hintField").innerText = `Your favorite Ghostbuster`;
+    };
+
+    if (chosenWord === "tom cruise") {
+        document.getElementById("hintField").innerText = `Won Sexiest Man Alive in 1990 at age 28`;
+    };
+
+    if (chosenWord === "tom hanks") {
+        document.getElementById("hintField").innerText = `Best Actor Winner 1993 AND 1994`;
+    };
+
+    if (chosenWord === "arnold schwarzenegger") {
+        document.getElementById("hintField").innerText = `Has killed 312 people on screen, and counting...`;
+    };
+
 
     // stores the last display, to be checked against later for changes, to determine if a correct guess was not made
     oldDisplay = display;
@@ -97,6 +119,7 @@ document.onkeyup = function (event) {
         solve();
     }
 
+    // update all html elements with new values
     document.getElementById("currentWordField").innerText = display;
     document.getElementById("usedLettersField").innerText = usedLetters;
     document.getElementById("livesField").innerText = lives;
